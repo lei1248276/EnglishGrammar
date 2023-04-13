@@ -1,0 +1,42 @@
+---
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+const mds = await Astro.glob('../pages/*.md')
+const sideItem = mds.sort((a, b) => a.frontmatter.index - b.frontmatter.index)
+
+---
+
+<aside class="sidebar min-w-[30ch] max-h-screen pl-12 pt-12 pb-20 overflow-y-auto bg-bgColor border-r font-bold">
+  <h2 class="text-3xl py-2 text-sky-1">旋元佑进阶文法</h2>
+  <p class="text-xl py-2">﹝台﹞旋元佑 著</p>
+  <p class="text-xl py-2">
+    授权：
+    <a href="http://creativecommons.org/licenses/by-nc/4.0/" class="text-sky-1">
+      署名-非商用许可证
+    </a>
+  </p>
+
+  <ul class="pr-10 border-b">
+    {
+      sideItem.map(({ frontmatter, url }) => (
+        <a href={ url || '/' } class="block my-2 text-lg text-grey-1 hover:text-sky-1 transition-colors">
+          <li class={ frontmatter.title === title ? 'text-sky-1' : '' } >{ frontmatter.title }</li>
+        </a>
+      ))
+    }
+  </ul>
+</aside>
+
+<script>
+const leftSidebar = document.querySelector('.sidebar')
+const leftSidebarScroll = localStorage.getItem('sidebar-scroll')
+if (leftSidebar && leftSidebarScroll !== null) {
+  leftSidebar.scrollTop = parseInt(leftSidebarScroll, 10)
+}
+window.addEventListener('beforeunload', () => {
+  localStorage.setItem('sidebar-scroll', leftSidebar?.scrollTop + '')
+})
+</script>
