@@ -1,0 +1,22 @@
+---
+interface Props {
+  headings: { depth: number, slug: string, text: string }[]
+}
+
+const headings = Astro.props.headings.filter(v => v.depth === 2)
+
+---
+
+<div class="min-w-[30ch] h-full relative">
+  {
+    !!headings.length && <ol class="w-[88%] list-decimal absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-grey-3 rounded p-4 pl-10">
+      {
+        headings.map(({ slug, text }) => (
+          <a href={ '#' + slug } class="block text-sky-1 font-bold text-lg">
+            <li class="p-1">{ text }</li>
+          </a>
+        ))
+      }
+    </ol>
+  }
+</div>

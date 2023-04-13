@@ -1,14 +1,14 @@
 ---
 import type { MarkdownLayoutProps } from 'astro'
-import Sidebar from './Sidebar.astro'
+import '../styles/tailwind.css'
+import Sidebar from '../components/Sidebar.astro'
+import Menu from '../components/Menu.astro'
 
 type Props = MarkdownLayoutProps<{
 	title: string
-	index: number
 }>
 
-const { frontmatter: { title }} = Astro.props
-console.log(Astro.props)
+const { frontmatter: { title }, headings } = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -20,23 +20,16 @@ console.log(Astro.props)
     <meta name="generator" content={Astro.generator} />
     <title>{ title } - 旋元佑进阶文法</title>
   </head>
-  <body>
+  <body class="flex h-screen bg-bgColor">
     <Sidebar title={ title }/>
 
-    <slot />
+    <main class="prose lg:prose-xl max-w-none prose-h1:text-[2.25em] p-10 pt-12 overflow-y-auto overflow-x-hidden">
+      <slot />
+    </main>
+
+    <Menu headings={ headings }/>
   </body>
 </html>
 <style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	h1{
-		font-size: 2em;
-		font-weight: bold;
-	}
+
 </style>
