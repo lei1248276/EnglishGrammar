@@ -15,16 +15,20 @@ const nextchapter = sideItem[currentIndex + 1]
   <slot />
 
   <div class="flex justify-center items-center gap-10 font-bold">
-    <div class="border rounded p-2 hover:border-red-1 hover:cursor-pointer">
-      <a href={ preChapter.url }>
-        <span class="inline-block rotate-180">&#10140</span> { preChapter.frontmatter.title }
-      </a>
-    </div>
-    <div class="border rounded p-2 hover:border-red-1 hover:cursor-pointer">
-      <a href={ nextchapter.url }>
-        { nextchapter.frontmatter.title } &#10140;
-      </a>
-    </div>
+    {
+      preChapter && <div class="border rounded hover:border-red-1 hover:cursor-pointer">
+        <a href={ preChapter.url } class="p-2">
+          <span class="inline-block rotate-180">&#10140</span> { preChapter.frontmatter.title }
+        </a>
+      </div>
+    }
+    {
+      nextchapter && <div class="border rounded hover:border-red-1 hover:cursor-pointer">
+        <a href={ nextchapter.url } class="p-2">
+          { nextchapter.frontmatter.title } &#10140;
+        </a>
+      </div>
+    }
   </div>
 </main>
 
