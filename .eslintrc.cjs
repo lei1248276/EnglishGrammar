@@ -135,7 +135,6 @@ module.exports = {
     'no-floating-decimal': 2,
     'no-func-assign': 2,
     'no-implied-eval': 2,
-    'no-inner-declarations': [2, 'functions'],
     'no-invalid-regexp': 2,
     'no-irregular-whitespace': 2,
     'no-iterator': 2,

@@ -7,7 +7,7 @@ const headings = Astro.props.headings.filter(v => v.depth === 2)
 
 ---
 
-<div class="min-w-[30ch] h-full relative">
+<div class="max-xl:hidden min-w-[30ch] h-full relative">
   {
     !!headings.length && <ol class="w-[88%] list-decimal absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-grey-3 rounded p-4 pl-10">
       {

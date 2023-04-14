@@ -1,0 +1,57 @@
+---
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+const mds = await Astro.glob('../pages/*.md')
+const sideItem = mds.sort((a, b) => a.frontmatter.index - b.frontmatter.index)
+const currentIndex = sideItem.findIndex(v => v.frontmatter.title === title)
+const preChapter = sideItem[currentIndex - 1]
+const nextchapter = sideItem[currentIndex + 1]
+---
+
+<main class="prose lg:prose-xl max-w-none relative p-10 py-12 overflow-y-auto overflow-x-hidden">
+  <slot />
+
+  <div class="flex justify-center items-center gap-10 font-bold">
+    <div class="border rounded p-2 hover:border-red-1 hover:cursor-pointer">
+      <a href={ preChapter.url }>
+        <span class="inline-block rotate-180">&#10140</span> { preChapter.frontmatter.title }
+      </a>
+    </div>
+    <div class="border rounded p-2 hover:border-red-1 hover:cursor-pointer">
+      <a href={ nextchapter.url }>
+        { nextchapter.frontmatter.title } &#10140;
+      </a>
+    </div>
+  </div>
+</main>
+
+<script>
+const h2s = document.querySelectorAll('h2')
+
+if (h2s.length) {
+  function toTarget(e: MouseEvent) {
+    const target = e.target as HTMLElement
+    if (target) {
+      window.location.hash = '#' + target.id
+    }
+  }
+
+  h2s.forEach(h2 => { h2.addEventListener('click', toTarget) })
+}
+
+const main = document.querySelector('main')
+const pathname = localStorage.getItem('pathname')
+
+if (pathname === window.location.pathname) {
+  const scrollTop = localStorage.getItem('pageScroll')
+  main && scrollTop && (main.scrollTop = parseInt(scrollTop, 10))
+}
+
+window.addEventListener('beforeunload', () => {
+  localStorage.setItem('pathname', window.location.pathname)
+  main && localStorage.setItem('pageScroll', main.scrollTop + '')
+})
+</script>

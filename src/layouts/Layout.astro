@@ -2,6 +2,7 @@
 import type { MarkdownLayoutProps } from 'astro'
 import '../styles/tailwind.css'
 import Sidebar from '../components/Sidebar.astro'
+import Main from '../components/Main.astro'
 import Menu from '../components/Menu.astro'
 
 type Props = MarkdownLayoutProps<{
@@ -15,7 +16,7 @@ const { frontmatter: { title }, headings } = Astro.props
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{ title } - 旋元佑进阶文法</title>
@@ -23,9 +24,9 @@ const { frontmatter: { title }, headings } = Astro.props
   <body class="flex h-screen bg-bgColor">
     <Sidebar title={ title }/>
 
-    <main class="prose lg:prose-xl max-w-none prose-h1:text-[2.25em] p-10 pt-12 overflow-y-auto overflow-x-hidden">
+    <Main title={ title }>
       <slot />
-    </main>
+    </Main>
 
     <Menu headings={ headings }/>
   </body>

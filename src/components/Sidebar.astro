@@ -33,10 +33,12 @@ const sideItem = mds.sort((a, b) => a.frontmatter.index - b.frontmatter.index)
 <script>
 const leftSidebar = document.querySelector('.sidebar')
 const leftSidebarScroll = localStorage.getItem('sidebar-scroll')
-if (leftSidebar && leftSidebarScroll !== null) {
+
+if (leftSidebar && leftSidebarScroll) {
   leftSidebar.scrollTop = parseInt(leftSidebarScroll, 10)
 }
+
 window.addEventListener('beforeunload', () => {
-  localStorage.setItem('sidebar-scroll', leftSidebar?.scrollTop + '')
+  leftSidebar && localStorage.setItem('sidebar-scroll', leftSidebar.scrollTop + '')
 })
 </script>
