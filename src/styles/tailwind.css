@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+  .toggle-hidden{
+    @apply w-0 min-w-0 pl-0 !important;
+  }
+  
   .prose u {
     @apply text-red-1;
   }

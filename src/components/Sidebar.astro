@@ -9,26 +9,30 @@ const sideItem = mds.sort((a, b) => a.frontmatter.index - b.frontmatter.index)
 
 ---
 
-<aside class="sidebar min-w-[30ch] max-h-screen pl-12 pt-12 pb-20 overflow-y-auto bg-bgColor border-r font-bold">
-  <h2 class="text-3xl py-2 text-sky-1">旋元佑进阶文法</h2>
-  <p class="text-xl py-2">﹝台﹞旋元佑 著</p>
-  <p class="text-xl py-2">
-    授权：
-    <a href="http://creativecommons.org/licenses/by-nc/4.0/" class="text-sky-1">
-      署名-非商用许可证
-    </a>
-  </p>
+<div class="max-md:z-10 max-md:absolute max-md:top-0 max-md:left-0 max-md:bottom-0 flex items-center">
+  <aside class="sidebar max-md:pl-8 max-md:pt-8 max-md:min-w-[24ch] max-md:toggle-hidden min-w-[30ch] max-h-screen pl-12 pt-12 pb-20 overflow-y-auto overflow-x-visible bg-bgColor border-r font-bold transition-all">
+    <h2 class="max-md:text-2xl text-3xl py-2 text-sky-1">旋元佑进阶文法</h2>
+    <p class="max-md:text-lg text-xl py-2">﹝台﹞旋元佑 著</p>
+    <p class="max-md:text-lg text-xl py-2">
+      授权：
+      <a href="http://creativecommons.org/licenses/by-nc/4.0/" class="text-sky-1">
+        署名-非商用许可证
+      </a>
+    </p>
 
-  <ul class="pr-10 border-b">
-    {
-      sideItem.map(({ frontmatter, url }) => (
-        <a href={ url || '/' } class="block my-2 text-lg text-grey-1 hover:text-sky-1 transition-colors">
-          <li class={ frontmatter.title === title ? 'text-sky-1' : '' } >{ frontmatter.title }</li>
-        </a>
-      ))
-    }
-  </ul>
-</aside>
+    <ul class="pr-10 border-b">
+      {
+        sideItem.map(({ frontmatter, url }) => (
+          <a href={ url || '/' } class="block my-2 max-md:text-base text-lg text-grey-1 hover:text-sky-1 transition-colors">
+            <li class={ frontmatter.title === title ? 'text-sky-1' : '' } >{ frontmatter.title }</li>
+          </a>
+        ))
+      }
+    </ul>
+  </aside>
+
+  <div class="toggle md:hidden p-2 border border-l-0 rounded-tr rounded-br bg-bgColor">&#10140</div>
+</div>
 
 <script>
 const leftSidebar = document.querySelector('.sidebar')
@@ -41,4 +45,11 @@ if (leftSidebar && leftSidebarScroll) {
 window.addEventListener('beforeunload', () => {
   leftSidebar && localStorage.setItem('sidebar-scroll', leftSidebar.scrollTop + '')
 })
+
+const toggle = document.querySelector('.toggle')
+if (toggle && leftSidebar) {
+  toggle.addEventListener('click', () => {
+    (leftSidebar as HTMLElement).classList.toggle('max-md\:toggle-hidden')
+  })
+}
 </script>
