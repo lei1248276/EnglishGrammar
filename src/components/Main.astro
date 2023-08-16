@@ -17,14 +17,14 @@ const nextchapter = sideItem[currentIndex + 1]
   <div class="flex justify-center items-center gap-10 font-bold">
     {
       preChapter && <div class="border rounded hover:border-red-1 hover:cursor-pointer">
-        <a href={ preChapter.url } class="p-2">
+        <a href={ preChapter.url } id="preChapter" class="p-2">
           <span class="inline-block rotate-180">&#10140</span> { preChapter.frontmatter.title }
         </a>
       </div>
     }
     {
       nextchapter && <div class="border rounded hover:border-red-1 hover:cursor-pointer">
-        <a href={ nextchapter.url } class="p-2">
+        <a href={ nextchapter.url } id="nextChapter" class="p-2">
           { nextchapter.frontmatter.title } &#10140;
         </a>
       </div>
@@ -57,5 +57,12 @@ if (pathname === window.location.pathname) {
 window.addEventListener('beforeunload', () => {
   localStorage.setItem('pathname', window.location.pathname)
   main && localStorage.setItem('pageScroll', main.scrollTop + '')
+})
+
+document.addEventListener('keydown', e => {
+  switch (e.code) {
+    case 'ArrowLeft': document.querySelector('#preChapter')?.click(); break
+    case 'ArrowRight': document.querySelector('#nextChapter')?.click(); break
+  }
 })
 </script>
