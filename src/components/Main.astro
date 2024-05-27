@@ -52,6 +52,8 @@ const pathname = localStorage.getItem('pathname')
 if (pathname === window.location.pathname) {
   const scrollTop = localStorage.getItem('pageScroll')
   main && scrollTop && (main.scrollTop = parseInt(scrollTop, 10))
+} else if (!document.referrer || new URL(document.referrer).host !== window.location.host) {
+  pathname && window.location.replace(window.location.origin + pathname)
 }
 
 window.addEventListener('beforeunload', () => {
