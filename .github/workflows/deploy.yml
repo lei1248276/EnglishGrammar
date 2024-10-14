@@ -39,4 +39,4 @@ jobs:
         with:
           project: "engli"
           entrypoint: ""
-          root: "dist"
+          root: "/index.html"
