@@ -38,5 +38,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "engli"
-          entrypoint: "/dist/index.html"
-          root: "dist"
+          entrypoint: "dist/index.html"
+          root: ""
