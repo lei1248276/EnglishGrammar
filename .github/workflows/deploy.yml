@@ -38,5 +38,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "engl"
-          entrypoint: "server/entry.mjs"
+          entrypoint: "https://deno.land/std@0.208.0/http/file_server.ts"
           root: "dist"
